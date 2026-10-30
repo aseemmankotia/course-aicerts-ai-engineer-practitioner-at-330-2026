@@ -1,0 +1,16 @@
+## Chapter 7: The NLP Pipeline: From Text to Transformer-Based Understanding — Flashcards
+
+| # | Front (Question) | Back (Answer) |
+|---|-----------------|---------------|
+| 1 | Standard order of classical NLP preprocessing steps? | Tokenization → Lowercasing → Stop word removal → Stemming/Lemmatization. Exam tip: tokenization always comes first; stemming/lemmatization always last since they operate on individual normalized tokens. |
+| 2 | Stemming vs Lemmatization — key difference? | Stemming: fast, rule-based suffix stripping, may produce non-words ('studi'). Lemmatization: dictionary/morphology-based, returns real base words ('study'), slower. Exam tip: lemmatization needs POS context, stemming doesn't. |
+| 3 | TF-IDF formula components? | TF-IDF = TF(term, doc) × IDF(term). TF = term frequency in document. IDF = log(total docs / docs containing term). Exam tip: IDF down-weights common words appearing in many documents. |
+| 4 | Bag-of-words vs TF-IDF — when does each apply? | BoW: raw word counts, equal weighting, simple. TF-IDF: weights terms by importance, down-weights common words. Exam tip: TF-IDF almost always outperforms raw BoW for retrieval/classification tasks. |
+| 5 | Word2Vec/GloVe vs BERT embeddings — core distinction? | Word2Vec/GloVe: static, one fixed vector per word regardless of context. BERT: contextual, vector changes based on surrounding sentence. Exam tip: only contextual embeddings resolve polysemy (e.g., 'bank'). |
+| 6 | Common NER entity types? | PERSON, ORGANIZATION (ORG), LOCATION/GPE, DATE, TIME, MONEY, PERCENT, MISC. Exam tip: company names → ORG; cities/countries → GPE, not LOCATION in most schemas. |
+| 7 | Sentiment analysis: rule-based vs model-based approach? | Rule-based: fixed lexicon/keyword polarity scoring (e.g., VADER), fast but fails on sarcasm/slang. Model-based: trained/fine-tuned classifier (often transformer), handles context and sarcasm better but needs more compute. |
+| 8 | Typical Word2Vec/GloVe embedding dimensionality? | Commonly 100–300 dimensions (GloVe pretrained vectors ship in 50, 100, 200, 300-dim versions). Exam tip: dimensionality is fixed and static per word, unrelated to sentence length. |
+| 9 | BERT-base hidden/embedding size? | 768 dimensions (BERT-base); BERT-large uses 1024. Exam tip: larger hidden size = more parameters and compute cost, tested when comparing model tiers. |
+| 10 | Stop words — what are they and example removal? | Stop words are high-frequency, low-information words (e.g., 'the', 'is', 'and') removed before BoW/TF-IDF modeling. Exam tip: stop word removal is typically NOT done before feeding text into transformer models — they rely on full context. |
+| 11 | When should you choose TF-IDF over dense embeddings? | Choose TF-IDF when: dataset is small, interpretability is required, compute budget is limited, or exact keyword matching matters. Choose dense/contextual embeddings when: semantic similarity, large corpus, and contextual meaning matter most. |
+| 12 | Why do contextual embeddings handle polysemy better than static embeddings? | Contextual embeddings (BERT) generate a different vector for the same word based on surrounding tokens, so 'bank' (river) vs 'bank' (finance) get distinct representations. Static embeddings (Word2Vec/GloVe) assign one vector per word, averaging all senses together. |

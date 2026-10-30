@@ -1,0 +1,16 @@
+## Chapter 9: Building and Shipping AI Products: GUIs, APIs, and Deployment — Flashcards
+
+| # | Front (Question) | Back (Answer) |
+|---|-----------------|---------------|
+| 1 | Gradio vs Streamlit — exam rule of thumb? | Gradio = fast single-model demo (input→output via gr.Interface). Streamlit = multi-page data app/dashboard with widgets and session state. Exam tip: 'quick ML demo' → Gradio, 'internal dashboard with filters/charts' → Streamlit. |
+| 2 | gr.Interface vs gr.Blocks — when to use each? | gr.Interface = single input→output function wrapper, fastest to build. gr.Blocks = custom layouts with multiple components/events for more complex Gradio apps. Exam tip: Blocks is tested when the question mentions 'custom layout' or 'multiple interacting components'. |
+| 3 | Correct FastAPI decorator for an inference endpoint receiving a JSON payload? | @app.post('/predict') — NOT @app.get. GET requests shouldn't carry a body. Exam trap: choosing GET for prediction endpoints. |
+| 4 | What validates incoming JSON in a FastAPI endpoint? | A Pydantic BaseModel class (e.g., class PredictRequest(BaseModel): features: list[float]). FastAPI auto-validates the body and auto-generates OpenAPI docs at /docs. |
+| 5 | Docker's core exam-tested purpose in AI deployment? | Packages code + dependencies + runtime into a reproducible, portable container image. It does NOT train models or replace a GUI/API layer — it houses them. |
+| 6 | Dockerfile anti-pattern the exam flags for reproducibility? | Using the `latest` tag for base images (e.g., FROM python:latest). Correct approach: pin exact versions (FROM python:3.11.8-slim) and pin dependency versions in requirements.txt. |
+| 7 | Model versioning vs monitoring — key difference? | Versioning = tracking which trained artifact/weights are deployed (v1.2, v1.3). Monitoring = tracking live prediction quality, latency, and data drift after deployment. Both are basic MLOps but answer different questions. |
+| 8 | UX requirement for AI products regarding latency? | Always show latency feedback (spinner, progress bar, streamed tokens) during inference. Exam tip: silent waiting with no feedback is flagged as a bad UX pattern for AI apps. |
+| 9 | Why must AI product UIs expose error states and explainability? | Users need to know WHEN a model fails or is uncertain (error state) and WHY it gave an answer (explainability, e.g., confidence score, source citation). The exam treats this as a stakeholder-trust requirement, not optional polish. |
+| 10 | Choose the format: one-time internal review of model behavior by the data science team itself. | Notebook demo — fastest, no deployment needed, good for exploratory/one-off review. Not suitable for non-technical stakeholders or repeated use. |
+| 11 | Choose the format: repeated stakeholder demos needing interactive input, no engineering integration. | Gradio app — shareable interactive UI, no coding needed by the end user, quick to build. Use when the audience tries inputs themselves but scale/auth aren't required. |
+| 12 | Choose the format: other engineering teams need to integrate at scale with SLAs. | Production API (FastAPI + Docker) — provides a documented contract (OpenAPI), auth, rate limiting, and reproducible deployment needed for scale and SLA guarantees. |
